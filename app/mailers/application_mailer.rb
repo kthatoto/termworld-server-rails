@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  # default from: 'from@gmail.com'
-  # layout 'mailer'
+  default from: "Termworld <#{ENV['EMAIL']}>"
+  layout 'mailer'
 end
