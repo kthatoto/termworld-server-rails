@@ -4,5 +4,5 @@ Rails.application.routes.draw do
     post :login
     post :logout
   end
-  resources :users, only: [:index, :create]
+  resources :users, only: [:index, :create, :show], param: :name
 end
