@@ -13,4 +13,9 @@ class UsersController < ApplicationController
     user = User.create!(account: @current_account, name: params[:name])
     render json: { user: UserSerializer.new(user) }, status: 201
   end
+
+  def show
+    user = User.find_by!(account: @current_account, name: params[:name])
+    return render json: { user: UserSerializer.new(user) }
+  end
 end
