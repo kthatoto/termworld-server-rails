@@ -12,7 +12,13 @@ class User < ApplicationRecord
   end
 
   def levelup!
-    return unless can_levelup?
+    return false unless can_levelup?
+    before_params = {
+      level: self.level,
+      max_hp: self.max_hp,
+      attack_power: self.attack_power,
+      defensive_power: self.defensive_power,
+    }
     ActiveRecord::Base.transaction do
       while can_levelup? do
         self.exp -= next_level_exp
@@ -23,5 +29,11 @@ class User < ApplicationRecord
       end
       save!
     end
+    {
+      level: self.level - before_params[:level],
+      max_hp: self.max_hp - before_params[:max_hp],
+      attack_power: self.attack_power - before_params[:attack_power],
+      defensive_power: self.defensive_power - before_params[:defensive_power],
+    }
   end
 end

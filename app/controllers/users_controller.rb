@@ -18,4 +18,17 @@ class UsersController < ApplicationController
     user = User.find_by!(account: @current_account, name: params[:name])
     return render json: { user: UserSerializer.new(user) }
   end
+
+  def earn_exp
+    user = User.find_by!(account: @current_account, name: params[:name])
+    user.exp += params[:exp]
+
+    diff = false
+    if user.can_levelup?
+      diff = user.levelup!
+    else
+      user.save!
+    end
+    render json: { user: UserSerializer.ne(user), leveluped: !!diff, diff: diff || {} }
+  end
 end
