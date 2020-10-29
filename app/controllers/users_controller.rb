@@ -29,6 +29,6 @@ class UsersController < ApplicationController
     else
       user.save!
     end
-    render json: { user: UserSerializer.ne(user), leveluped: !!diff, diff: diff || {} }
+    render json: { user: UserSerializer.new(user), leveluped: !!diff, diff: diff || {} }
   end
 end
