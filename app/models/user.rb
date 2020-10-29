@@ -11,12 +11,17 @@ class User < ApplicationRecord
     exp >= next_level_exp
   end
 
-  def levelup
+  def levelup!
     return unless can_levelup?
-    exp -= next_level_exp
-    level += 1
-    attack_power += 1 + (level / 5) + (level % 2)
-    deffensive_power += 1 + (level / 5) + ((level + 1) % 2)
-    save!
+    ActiveRecord::Base.transaction do
+      while can_levelup? do
+        self.exp -= next_level_exp
+        self.level += 1
+        self.max_hp += 1 + (self.level / 3)
+        self.attack_power += 1 + (self.level / 5) + (self.level % 2)
+        self.deffensive_power += 1 + (self.level / 5) + ((self.level + 1) % 2)
+      end
+      save!
+    end
   end
 end
