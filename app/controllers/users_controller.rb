@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   def earn_exp
     user = User.find_by!(account: @current_account, name: params[:name])
-    user.exp += params[:exp]
+    user.exp += params[:exp].to_i
 
     diff = false
     if user.can_levelup?
