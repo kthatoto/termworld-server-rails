@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_21_060458) do
+ActiveRecord::Schema.define(version: 2020_10_29_004833) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", null: false
@@ -24,6 +24,11 @@ ActiveRecord::Schema.define(version: 2019_06_21_060458) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "max_hp", default: 10, null: false
+    t.integer "level", default: 1, null: false
+    t.integer "exp", default: 0, null: false
+    t.integer "attack_power", default: 5, null: false
+    t.integer "deffensive_power", default: 5, null: false
   end
 
 end
