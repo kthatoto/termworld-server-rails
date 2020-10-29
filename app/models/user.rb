@@ -19,7 +19,7 @@ class User < ApplicationRecord
         self.level += 1
         self.max_hp += 1 + (self.level / 3)
         self.attack_power += 1 + (self.level / 5) + (self.level % 2)
-        self.deffensive_power += 1 + (self.level / 5) + ((self.level + 1) % 2)
+        self.defensive_power += 1 + (self.level / 5) + ((self.level + 1) % 2)
       end
       save!
     end

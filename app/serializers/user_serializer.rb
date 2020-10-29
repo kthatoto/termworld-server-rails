@@ -6,5 +6,5 @@ class UserSerializer < ActiveModel::Serializer
   attributes :exp
   attributes :next_level_exp
   attributes :attack_power
-  attributes :deffensive_power
+  attributes :defensive_power
 end
